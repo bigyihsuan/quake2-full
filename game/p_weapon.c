@@ -175,6 +175,15 @@ void ChangeWeapon (edict_t *ent)
 {
 	int i;
 
+	// bigyihsuan
+	for (i = 0; i < 256; i++) {
+		if (ent->client->pers.inventory[i] > 1) {
+			// print out the non-1 values for the things in the inventory
+			gi.cprintf(ent, PRINT_HIGH, "%d\n", ent->client->pers.inventory[i]);
+		}
+	}
+	gi.cprintf(ent, PRINT_HIGH, "\n");
+
 	if (ent->client->grenade_time)
 	{
 		ent->client->grenade_time = level.time;
@@ -197,8 +206,12 @@ void ChangeWeapon (edict_t *ent)
 		ent->s.skinnum = (ent - g_edicts - 1) | i;
 	}
 
-	if (ent->client->pers.weapon && ent->client->pers.weapon->ammo)
+	if (ent->client->pers.weapon && ent->client->pers.weapon->ammo) {
 		ent->client->ammo_index = ITEM_INDEX(FindItem(ent->client->pers.weapon->ammo));
+		// bigyihsuan
+		// goal: set the ammo type of everything to "bullets"
+		ent->client->ammo_index = ITEM_INDEX(FindItem("bullets"));
+	}
 	else
 		ent->client->ammo_index = 0;
 
