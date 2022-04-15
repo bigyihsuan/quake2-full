@@ -5,11 +5,11 @@ the guns shoot people and shoot monsters and stuff
 This is a mod for Quake 2 for IT266's final project.
 
 ## Common Deliverables
-* Desktop shortcut (`final.lnk`)
-* Readme (this file)
-* ?? Main menu modification
-* ?? Help screen
-* ?? HUD modification
+* Shortcut that Auto-Launches your Mod (`final.lnk`)
+* Mod in a Separate Folder (yes)
+* README file in GIT that explains HOWTO install and play / test your mod (this file, half)
+* UI updates reflecting your Personal Deliverables
+* Help Screen to detail how to play your mod in game
 
 ## Personal Deliverables
 * bots that shoot the weapons for you (can be anything that shuut) (glowing aura with basic colors)
