@@ -209,7 +209,7 @@ void ChangeWeapon (edict_t *ent)
 	}
 
 	if (ent->client->pers.weapon && ent->client->pers.weapon->ammo) {
-		ent->client->ammo_index = ITEM_INDEX(FindItem(ent->client->pers.weapon->ammo));
+		// ent->client->ammo_index = ITEM_INDEX(FindItem(ent->client->pers.weapon->ammo));
 		// bigyihsuan
 		// goal: set the ammo type of everything to "bullets"
 		ent->client->ammo_index = ITEM_INDEX(FindItem("bullets"));
@@ -834,6 +834,10 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	vec3_t	start;
 	vec3_t	offset;
 
+	edict_t* soldier;
+	trace_t tr;
+	int i;
+
 	if (is_quad)
 		damage *= 4;
 	AngleVectors (ent->client->v_angle, forward, right, NULL);
@@ -844,7 +848,88 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	fire_blaster (ent, start, forward, damage, 1000, effect, hyper);
+	// bigyihsuan
+	//fire_blaster (ent, start, forward, damage, 1000, effect, hyper);
+	// see: https://github.com/bigyihsuan/quake2-full/blob/73f7d1531068cb3e4bc6242e7f50fa96cfd77448/g_weapon.c#L452
+	if ((ent->client)) {
+		gi.cprintf(ent, PRINT_HIGH, "trying to spawn at %f, %f, %f\n", ent->s.origin[0], ent->s.origin[1], ent->s.origin[2]);
+		
+		soldier = G_Spawn();
+		if (soldier != NULL) {
+			gi.cprintf(ent, PRINT_HIGH, "soldier allocated\n");
+			VectorCopy(ent->s.origin, soldier->s.origin);
+			soldier->s.origin[2] += 25;
+			gi.cprintf(ent, PRINT_HIGH, "soldier position set\n");
+
+			SP_monster_soldier_light(soldier);
+			gi.cprintf(ent, PRINT_HIGH, "soldier spawn function called\n");
+
+			/*
+			// try 10 times to spawn?
+			for (i = 0; i < 10; i++)
+			{
+				// trace from player, ignore the player
+				tr = gi.trace(soldier->s.origin, ent->mins, ent->maxs, start, ent, MASK_SHOT);
+				gi.cprintf(ent, PRINT_HIGH, "iter %d: trace @ x=%.2f y=%.2f z=%.2f\n", i, tr.endpos[0], tr.endpos[1], tr.endpos[2]);
+				if (tr.fraction < 1)
+				{
+					gi.cprintf(ent, PRINT_HIGH, "add trace plane normal to soldier origin\n");
+					VectorAdd(tr.plane.normal, soldier->s.origin, soldier->s.origin);
+				}
+				else
+				{
+					gi.cprintf(ent, PRINT_HIGH, "good trace, exiting loop\n");
+					break;
+				}
+			}
+			if (i == 10)
+			{
+				gi.cprintf(ent, PRINT_HIGH, "failed to trace, freeing soldier\n");
+				G_FreeEdict(soldier);
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "good trace\n");
+				gi.cprintf(ent, PRINT_HIGH, "trace @ x=%.2f y=%.2f z=%.2f\n", i, ent->s.origin[0], ent->s.origin[1], ent->s.origin[2]);
+				// set origin to the traced endpoint
+				VectorCopy(ent->s.origin, soldier->s.origin);
+				soldier->s.origin[2] += 25;
+
+				//soldier->team = ent->owner->team;
+				//soldier->owner = ent->owner;
+				////ent->owner->client->live_pets++;
+				////soldier->s.effects |= (EF_ROTATE << (ent->owner->playerIndex + 1));
+				gi.linkentity(soldier);
+				//gi.cprintf(ent, PRINT_HIGH, "linked\n");
+			}
+			*/
+			VectorCopy(ent->s.origin, soldier->s.origin);
+			soldier->s.origin[0] += 50;
+			soldier->s.origin[1] += 50;
+			soldier->s.origin[2] += 50;
+			gi.cprintf(ent, PRINT_HIGH, "trace  @ x=%.2f y=%.2f z=%.2f\n", soldier->s.origin[0], soldier->s.origin[1], soldier->s.origin[2]);
+			gi.cprintf(ent, PRINT_HIGH, "player @ x=%.2f y=%.2f z=%.2f\n", ent->s.origin[0], ent->s.origin[1], ent->s.origin[2]);
+
+			//soldier->classname = "monster_soldier_light";
+
+			gi.linkentity(soldier);
+		}
+		else {
+			gi.cprintf(ent, PRINT_HIGH, "SOLDIER WAS NULL\n");
+			G_FreeEdict(soldier);
+		}
+	}
+	else {
+		/*if (!(ent->owner)) {
+			gi.cprintf(ent, PRINT_HIGH, "owner was null\n");
+		}
+		if ((ent->owner) && !(ent->owner->client)) {
+			gi.cprintf(ent, PRINT_HIGH, "client was null\n");
+		}*/
+
+		gi.cprintf(ent, PRINT_HIGH, "not a player\n");
+	}
+	//gi.cprintf(ent, PRINT_HIGH, "sucessful spawning\n");
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);

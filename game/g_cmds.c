@@ -899,6 +899,27 @@ void Cmd_PlayerList_f(edict_t *ent)
 	gi.cprintf(ent, PRINT_HIGH, "%s", text);
 }
 
+// bigyihsuan
+void Cmd_SpawnMonster_f(edict_t* ent) {
+	edict_t* soldier;
+	
+	gi.cprintf(ent, PRINT_HIGH, "Spawning monster...\n");
+
+	// https://github.com/bigyihsuan/quake2-full/blob/a914c218c6e82360596e5f0ed850a34ab7de0067/g_weapon.c#L450
+	soldier = G_Spawn();
+	if (soldier != NULL) {
+		VectorCopy(ent->s.origin, soldier->s.origin);
+		soldier->s.origin[2] += 25;
+		SP_monster_soldier_light(soldier);
+
+		soldier->team = ent->owner->team;
+		soldier->owner = ent->owner;
+		gi.linkentity(soldier);
+	}
+	else {
+		gi.cprintf(ent, PRINT_HIGH, "SOLDIER WAS NULL\n");
+	}
+}
 
 /*
 =================
@@ -987,6 +1008,9 @@ void ClientCommand (edict_t *ent)
 		Cmd_Wave_f (ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
+	// bigyihsuan
+	//else if (Q_stricmp(cmd, "spawn") == 0)
+	//	Cmd_SpawnMonster_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

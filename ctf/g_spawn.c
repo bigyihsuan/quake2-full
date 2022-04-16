@@ -593,27 +593,44 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 		// remove things (except the world) from different skill levels or deathmatch
 		if (ent != g_edicts)
 		{
-			if (deathmatch->value)
+			//if (deathmatch->value)
+			//{
+			//	if ( ent->spawnflags & SPAWNFLAG_NOT_DEATHMATCH )
+			//	{
+			//		G_FreeEdict (ent);	
+			//		inhibit++;
+			//		continue;
+			//	}
+			//}
+			//else
+			//{
+			//	if ( /* ((coop->value) && (ent->spawnflags & SPAWNFLAG_NOT_COOP)) || */
+			//		((skill->value == 0) && (ent->spawnflags & SPAWNFLAG_NOT_EASY)) ||
+			//		((skill->value == 1) && (ent->spawnflags & SPAWNFLAG_NOT_MEDIUM)) ||
+			//		(((skill->value == 2) || (skill->value == 3)) && (ent->spawnflags & SPAWNFLAG_NOT_HARD))
+			//		)
+			//		{
+			//			G_FreeEdict (ent);	
+			//			inhibit++;
+			//			continue;
+			//		}
+			//}
+
+			if (ent->spawnflags & SPAWNFLAG_NOT_DEATHMATCH)
 			{
-				if ( ent->spawnflags & SPAWNFLAG_NOT_DEATHMATCH )
-				{
-					G_FreeEdict (ent);	
-					inhibit++;
-					continue;
-				}
+				//G_FreeEdict(ent);
+				inhibit++;
+				continue;
 			}
-			else
+			if ( /* ((coop->value) && (ent->spawnflags & SPAWNFLAG_NOT_COOP)) || */
+				((skill->value == 0) && (ent->spawnflags & SPAWNFLAG_NOT_EASY)) ||
+				((skill->value == 1) && (ent->spawnflags & SPAWNFLAG_NOT_MEDIUM)) ||
+				(((skill->value == 2) || (skill->value == 3)) && (ent->spawnflags & SPAWNFLAG_NOT_HARD))
+				)
 			{
-				if ( /* ((coop->value) && (ent->spawnflags & SPAWNFLAG_NOT_COOP)) || */
-					((skill->value == 0) && (ent->spawnflags & SPAWNFLAG_NOT_EASY)) ||
-					((skill->value == 1) && (ent->spawnflags & SPAWNFLAG_NOT_MEDIUM)) ||
-					(((skill->value == 2) || (skill->value == 3)) && (ent->spawnflags & SPAWNFLAG_NOT_HARD))
-					)
-					{
-						G_FreeEdict (ent);	
-						inhibit++;
-						continue;
-					}
+				G_FreeEdict(ent);
+				inhibit++;
+				continue;
 			}
 
 			ent->spawnflags &= ~(SPAWNFLAG_NOT_EASY|SPAWNFLAG_NOT_MEDIUM|SPAWNFLAG_NOT_HARD|SPAWNFLAG_NOT_COOP|SPAWNFLAG_NOT_DEATHMATCH);

@@ -1114,3 +1114,5 @@ struct edict_s
 	monsterinfo_t	monsterinfo;
 };
 
+// bigyihsuan
+void SP_monster_soldier_light(edict_t* self);

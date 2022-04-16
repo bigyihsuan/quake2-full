@@ -143,12 +143,17 @@ static void fire_lead (edict_t *self, vec3_t start, vec3_t aimdir, int damage, i
 	qboolean	water = false;
 	int			content_mask = MASK_SHOT | MASK_WATER;
 
+	// start a trace from self origin to the start location, no limits
 	tr = gi.trace (self->s.origin, NULL, NULL, start, self, MASK_SHOT);
+	// if this trace didn't hit within range (aka, no hit at all)
 	if (!(tr.fraction < 1.0))
 	{
+		// trace again
+
 		vectoangles (aimdir, dir);
 		AngleVectors (dir, forward, right, up);
-
+		
+		// set end vector
 		r = crandom()*hspread;
 		u = crandom()*vspread;
 		VectorMA (start, 8192, forward, end);
@@ -161,7 +166,7 @@ static void fire_lead (edict_t *self, vec3_t start, vec3_t aimdir, int damage, i
 			VectorCopy (start, water_start);
 			content_mask &= ~MASK_WATER;
 		}
-
+		// trace again, this time from start to end
 		tr = gi.trace (start, NULL, NULL, end, self, content_mask);
 
 		// see if we hit water

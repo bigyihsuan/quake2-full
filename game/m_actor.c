@@ -340,6 +340,10 @@ void actor_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage
 {
 	int		n;
 
+	// bigyihsuan
+	// drop bullets on death, regardless of how
+	gi.cprintf(self, PRINT_HIGH, "Actor %s died at %d %d %d\n", self->classname, point[0], point[1], point[2]);
+
 // check for gib
 	if (self->health <= -80)
 	{
