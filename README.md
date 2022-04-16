@@ -4,8 +4,15 @@ the guns shoot people and shoot monsters and stuff
 
 This is a mod for Quake 2 for IT266's final project.
 
+# Building and Installation
+
+## Building
+If you use Bash, you can run `build.sh` and provide the name of the folder to install the mod in.
+
+# Deliverables
+
 ## Common Deliverables
-* Shortcut that Auto-Launches your Mod (`final.lnk`)
+* Shortcut that Auto-Launches your Mod (`000final.lnk`)
 * Mod in a Separate Folder (yes)
 * README file in GIT that explains HOWTO install and play / test your mod (this file, half)
 * UI updates reflecting your Personal Deliverables

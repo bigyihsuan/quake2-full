@@ -176,13 +176,15 @@ void ChangeWeapon (edict_t *ent)
 	int i;
 
 	// bigyihsuan
-	for (i = 0; i < 256; i++) {
-		if (ent->client->pers.inventory[i] > 1) {
-			// print out the non-1 values for the things in the inventory
-			gi.cprintf(ent, PRINT_HIGH, "%d\n", ent->client->pers.inventory[i]);
-		}
-	}
-	gi.cprintf(ent, PRINT_HIGH, "\n");
+	//for (i = 0; i < 256; i++) {
+	//	if (ent->client->pers.inventory[i] > 1) {
+	//		// print out the non-1 values for the things in the inventory
+	//		gi.cprintf(ent, PRINT_HIGH, "%d %d\n", i, ent->client->pers.inventory[i]);
+	//	}
+	//}
+	//gi.cprintf(ent, PRINT_HIGH, "\n");
+
+	// 19 = bullets
 
 	if (ent->client->grenade_time)
 	{
