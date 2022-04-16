@@ -1,7 +1,11 @@
 ﻿D:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(500,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  p_weapon.c
-D:\SW\IT266-002\quake2-full\game\p_weapon.c(831,83): warning C4100: 'effect': unreferenced formal parameter
-D:\SW\IT266-002\quake2-full\game\p_weapon.c(838,10): warning C4101: 'tr': unreferenced local variable
-D:\SW\IT266-002\quake2-full\game\p_weapon.c(839,6): warning C4101: 'i': unreferenced local variable
+  m_soldier.c
+D:\SW\IT266-002\quake2-full\game\m_soldier.c(409,67): warning C4100: 'damage': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_soldier.c(409,57): warning C4100: 'kick': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_soldier.c(409,44): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_soldier.c(792,44): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_soldier.c(1144,63): warning C4100: 'attacker': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_soldier.c(1144,43): warning C4100: 'inflictor': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_soldier.c(1151,6): warning C4101: 'item_index': unreferenced local variable
      Creating library .\..\release\gamex86.lib and object .\..\release\gamex86.exp
   game.vcxproj -> D:\SW\IT266-002\quake2-full\game\release\gamex86.dll
