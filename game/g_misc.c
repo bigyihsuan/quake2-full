@@ -1874,3 +1874,19 @@ void SP_misc_teleporter_dest (edict_t *ent)
 	gi.linkentity (ent);
 }
 
+/* ------ bigyihsuan ------ */
+// spawn a bullet box at a given entity's position
+void bigyihsuan_spawn_bullet_box(edict_t* entity) {
+	// for spawning bullet boxes on death
+	gitem_t* item;
+	int item_index;
+	edict_t* item_ent;
+	// spawn a bullet box
+	item = FindItem("bullets");
+	item_ent = Drop_Item(entity, item);
+	if (item_ent == NULL) {
+		//gi.cprintf(self, PRINT_HIGH, "Failed to drop bullets! Freeing...\n");
+		G_FreeEdict(item_ent);
+	}
+}
+

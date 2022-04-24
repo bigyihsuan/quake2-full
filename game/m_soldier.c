@@ -1144,12 +1144,6 @@ mmove_t soldier_move_death6 = {FRAME_death601, FRAME_death610, soldier_frames_de
 void soldier_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
 	int		n;
-	
-	// bigyihsuan
-	// for spawning bullet boxes on death
-	gitem_t* item;
-	int item_index;
-	edict_t* item_ent;
 
 // check for gib
 	if (self->health <= self->gib_health)
@@ -1197,14 +1191,7 @@ void soldier_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 	else
 		self->monsterinfo.currentmove = &soldier_move_death6;
 
-	// bigyihsuan
-	// on death spawn a bullet box
-	item = FindItem("bullets");
-	item_ent = Drop_Item(self, item);
-	if (item_ent == NULL) {
-		//gi.cprintf(self, PRINT_HIGH, "Failed to drop bullets! Freeing...\n");
-		G_FreeEdict(item_ent);
-	}
+	bigyihsuan_spawn_bullet_box(self);
 }
 
 

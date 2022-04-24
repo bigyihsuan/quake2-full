@@ -1116,3 +1116,4 @@ struct edict_s
 
 // bigyihsuan
 void SP_monster_soldier_light(edict_t* self);
+void bigyihsuan_spawn_bullet_box(edict_t* entity);
