@@ -835,8 +835,8 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	vec3_t	offset;
 
 	edict_t* soldier;
-	trace_t tr;
-	int i;
+	vec3_t angle;
+	vec3_t scale;
 
 	if (is_quad)
 		damage *= 4;
@@ -858,55 +858,20 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		if (soldier != NULL) {
 			gi.cprintf(ent, PRINT_HIGH, "soldier allocated\n");
 			VectorCopy(ent->s.origin, soldier->s.origin);
-			soldier->s.origin[2] += 25;
+			//soldier->s.origin[2] += 25;
+			VectorCopy(ent->s.angles, angle);
+			VectorSet(scale, 1.5, 1.5, 1.5);
+			angle[2] = 0;
+			VectorScale(angle, *scale, angle);
+			VectorAdd(soldier->s.origin, angle, soldier->s.origin);
 			gi.cprintf(ent, PRINT_HIGH, "soldier position set\n");
 
 			SP_monster_soldier_light(soldier);
 			gi.cprintf(ent, PRINT_HIGH, "soldier spawn function called\n");
-
-			/*
-			// try 10 times to spawn?
-			for (i = 0; i < 10; i++)
-			{
-				// trace from player, ignore the player
-				tr = gi.trace(soldier->s.origin, ent->mins, ent->maxs, start, ent, MASK_SHOT);
-				gi.cprintf(ent, PRINT_HIGH, "iter %d: trace @ x=%.2f y=%.2f z=%.2f\n", i, tr.endpos[0], tr.endpos[1], tr.endpos[2]);
-				if (tr.fraction < 1)
-				{
-					gi.cprintf(ent, PRINT_HIGH, "add trace plane normal to soldier origin\n");
-					VectorAdd(tr.plane.normal, soldier->s.origin, soldier->s.origin);
-				}
-				else
-				{
-					gi.cprintf(ent, PRINT_HIGH, "good trace, exiting loop\n");
-					break;
-				}
-			}
-			if (i == 10)
-			{
-				gi.cprintf(ent, PRINT_HIGH, "failed to trace, freeing soldier\n");
-				G_FreeEdict(soldier);
-			}
-			else
-			{
-				gi.cprintf(ent, PRINT_HIGH, "good trace\n");
-				gi.cprintf(ent, PRINT_HIGH, "trace @ x=%.2f y=%.2f z=%.2f\n", i, ent->s.origin[0], ent->s.origin[1], ent->s.origin[2]);
-				// set origin to the traced endpoint
-				VectorCopy(ent->s.origin, soldier->s.origin);
-				soldier->s.origin[2] += 25;
-
-				//soldier->team = ent->owner->team;
-				//soldier->owner = ent->owner;
-				////ent->owner->client->live_pets++;
-				////soldier->s.effects |= (EF_ROTATE << (ent->owner->playerIndex + 1));
-				gi.linkentity(soldier);
-				//gi.cprintf(ent, PRINT_HIGH, "linked\n");
-			}
-			*/
-			VectorCopy(ent->s.origin, soldier->s.origin);
-			soldier->s.origin[0] += 50;
-			soldier->s.origin[1] += 50;
-			soldier->s.origin[2] += 50;
+			//VectorCopy(ent->s.origin, soldier->s.origin);
+			//soldier->s.origin[0] += 50;
+			//soldier->s.origin[1] += 50;
+			//soldier->s.origin[2] += 50;
 			gi.cprintf(ent, PRINT_HIGH, "trace  @ x=%.2f y=%.2f z=%.2f\n", soldier->s.origin[0], soldier->s.origin[1], soldier->s.origin[2]);
 			gi.cprintf(ent, PRINT_HIGH, "player @ x=%.2f y=%.2f z=%.2f\n", ent->s.origin[0], ent->s.origin[1], ent->s.origin[2]);
 
