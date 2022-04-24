@@ -535,6 +535,7 @@ void boss2_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage
 	self->takedamage = DAMAGE_YES;
 	self->monsterinfo.currentmove = &boss2_move_death;
 #endif
+	bigyihsuan_spawn_bullet_box(self);
 }
 
 qboolean Boss2_CheckAttack (edict_t *self)

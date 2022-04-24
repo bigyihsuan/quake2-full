@@ -602,6 +602,7 @@ void floater_dead (edict_t *self)
 
 void floater_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
+	bigyihsuan_spawn_bullet_box(self);
 	gi.sound (self, CHAN_VOICE, sound_death1, 1, ATTN_NORM, 0);
 	BecomeExplosion1(self);
 }

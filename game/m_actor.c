@@ -370,6 +370,7 @@ void actor_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage
 		self->monsterinfo.currentmove = &actor_move_death1;
 	else
 		self->monsterinfo.currentmove = &actor_move_death2;
+	bigyihsuan_spawn_bullet_box(self);
 }
 
 

@@ -275,9 +275,9 @@ void infantry_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dam
 void infantry_stand (edict_t *self);
 void monster_use (edict_t *self, edict_t *other, edict_t *activator);
 
-void turret_driver_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
+void turret_driver_die(edict_t* self, edict_t* inflictor, edict_t* attacker, int damage, vec3_t point)
 {
-	edict_t	*ent;
+	edict_t* ent;
 
 	// level the gun
 	self->target_ent->move_angles[0] = 0;
@@ -292,7 +292,8 @@ void turret_driver_die (edict_t *self, edict_t *inflictor, edict_t *attacker, in
 	self->target_ent->owner = NULL;
 	self->target_ent->teammaster->owner = NULL;
 
-	infantry_die (self, inflictor, attacker, damage);
+	infantry_die(self, inflictor, attacker, damage);
+	bigyihsuan_spawn_bullet_box(self);
 }
 
 qboolean FindTarget (edict_t *self);

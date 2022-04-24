@@ -405,6 +405,7 @@ void berserk_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 		self->monsterinfo.currentmove = &berserk_move_death1;
 	else
 		self->monsterinfo.currentmove = &berserk_move_death2;
+	bigyihsuan_spawn_bullet_box(self);
 }
 
 

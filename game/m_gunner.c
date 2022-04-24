@@ -336,6 +336,7 @@ void gunner_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damag
 {
 	int		n;
 
+	bigyihsuan_spawn_bullet_box(self);
 // check for gib
 	if (self->health <= self->gib_health)
 	{

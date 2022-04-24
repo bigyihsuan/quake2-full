@@ -414,6 +414,7 @@ void medic_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage
 {
 	int		n;
 
+	bigyihsuan_spawn_bullet_box(self);
 	// if we had a pending patient, free him up for another medic
 	if ((self->enemy) && (self->enemy->owner == self))
 		self->enemy->owner = NULL;

@@ -594,6 +594,7 @@ void jorg_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage,
 	self->s.sound = 0;
 	self->count = 0;
 	self->monsterinfo.currentmove = &jorg_move_death;
+	bigyihsuan_spawn_bullet_box(self);
 }
 
 qboolean Jorg_CheckAttack (edict_t *self)

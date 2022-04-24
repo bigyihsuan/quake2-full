@@ -656,6 +656,8 @@ void BossExplode (edict_t *self)
 
 void supertank_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
+	bigyihsuan_spawn_bullet_box(self);
+
 	gi.sound (self, CHAN_VOICE, sound_death, 1, ATTN_NORM, 0);
 	self->deadflag = DEAD_DEAD;
 	self->takedamage = DAMAGE_NO;

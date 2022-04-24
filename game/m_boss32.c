@@ -675,6 +675,7 @@ void makron_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damag
 	edict_t *tempent;
 
 	int		n;
+	bigyihsuan_spawn_bullet_box(self);
 
 	self->s.sound = 0;
 	// check for gib
