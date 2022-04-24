@@ -1,5 +1,11 @@
 ﻿D:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(500,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  g_turret.c
-D:\SW\IT266-002\quake2-full\game\g_turret.c(278,97): warning C4100: 'point': unreferenced formal parameter
+  m_berserk.c
+D:\SW\IT266-002\quake2-full\game\m_berserk.c(39,45): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_berserk.c(222,31): warning C4100: 'self': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_berserk.c(315,57): warning C4100: 'kick': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_berserk.c(315,44): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_berserk.c(381,92): warning C4100: 'point': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_berserk.c(381,63): warning C4100: 'attacker': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\m_berserk.c(381,43): warning C4100: 'inflictor': unreferenced formal parameter
      Creating library .\..\release\gamex86.lib and object .\..\release\gamex86.exp
   game.vcxproj -> D:\SW\IT266-002\quake2-full\game\release\gamex86.dll
