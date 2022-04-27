@@ -143,33 +143,40 @@ static void fire_lead (edict_t *self, vec3_t start, vec3_t aimdir, int damage, i
 	qboolean	water = false;
 	int			content_mask = MASK_SHOT | MASK_WATER;
 
-	// start a trace from self origin to the start location, no limits
+	// bigyihsuan: start a trace from self origin to the start location, no limits
+	// bigyihsuan: check if can get from the entity origin to the gun muzzle so it's not shooting through walls
 	tr = gi.trace (self->s.origin, NULL, NULL, start, self, MASK_SHOT);
-	// if this trace didn't hit within range (aka, no hit at all)
+	// bigyihsuan: if this trace didn't hit within range (aka, no hit at all?)
+	// bigyihsuan: there is a wall or somethign between muzzle and entity shooting this
 	if (!(tr.fraction < 1.0))
 	{
-		// trace again
-
+		// bigyihsuan: turn the shoot forward direction into shoot angle
 		vectoangles (aimdir, dir);
+		// bigyihsuan: turn the shoot angle back to vectors
 		AngleVectors (dir, forward, right, up);
 		
 		// set end vector
+		// bigyihsuan: randomize it using h and v spread
 		r = crandom()*hspread;
 		u = crandom()*vspread;
+		// bigyihsuan: set end to some units starting from the start position in the direction of forward
 		VectorMA (start, 8192, forward, end);
+		// bigyihsuan: apply randomness
 		VectorMA (end, r, right, end);
 		VectorMA (end, u, up, end);
 
-		if (gi.pointcontents (start) & MASK_WATER)
+		if (gi.pointcontents (start) & MASK_WATER) // bigyihsuan: if the start position is in water
 		{
 			water = true;
 			VectorCopy (start, water_start);
-			content_mask &= ~MASK_WATER;
+			content_mask &= ~MASK_WATER; // bigyihsuan: ignore the water for next trace
 		}
-		// trace again, this time from start to end
+		// bigyihsuan: trace again
+		// bigyihsuan: from start position to end position
 		tr = gi.trace (start, NULL, NULL, end, self, content_mask);
 
 		// see if we hit water
+		// bigyihsuan: again
 		if (tr.contents & MASK_WATER)
 		{
 			int		color;
