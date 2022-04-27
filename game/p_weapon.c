@@ -30,17 +30,7 @@ static byte		is_silenced;
 void weapon_grenade_fire (edict_t *ent, qboolean held);
 
 
-static void P_ProjectSource (gclient_t *client, vec3_t point, vec3_t distance, vec3_t forward, vec3_t right, vec3_t result)
-{
-	vec3_t	_distance;
-
-	VectorCopy (distance, _distance);
-	if (client->pers.hand == LEFT_HANDED)
-		_distance[1] *= -1;
-	else if (client->pers.hand == CENTER_HANDED)
-		_distance[1] = 0;
-	G_ProjectSource (point, _distance, forward, right, result);
-}
+// moved to g_misc.c
 
 
 /*
@@ -830,16 +820,9 @@ BLASTER / HYPERBLASTER
 
 void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, int effect)
 {
-	vec3_t	forward, right;
+	vec3_t	forward, right, up;
 	vec3_t	start;
 	vec3_t	offset;
-
-	edict_t* soldier;
-	vec3_t angle;
-	vec3_t scale;
-	vec3_t up, end;
-	trace_t tr;
-	int contentMask;
 
 	if (is_quad)
 		damage *= 4;
@@ -851,68 +834,13 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	// bigyihsuan
 	//fire_blaster (ent, start, forward, damage, 1000, effect, hyper);
-	// see: https://github.com/bigyihsuan/quake2-full/blob/73f7d1531068cb3e4bc6242e7f50fa96cfd77448/g_weapon.c#L452
-	if ((ent->client)) {
-		gi.cprintf(ent, PRINT_HIGH, "player origin (%f, %f, %f)\n", ent->s.origin[0], ent->s.origin[1], ent->s.origin[2]);
-		vectoangles(forward, angle);
-		AngleVectors(angle, forward, right, up);
-		soldier = G_Spawn();
-		if (soldier != NULL) {
-			//gi.cprintf(ent, PRINT_HIGH, "soldier allocated\n");
-			tr = gi.trace(ent->s.origin, NULL, NULL, start, ent, MASK_SHOT & ~MASK_WATER); // trace from muzzle to origin to check for wall
-			gi.cprintf(ent, PRINT_HIGH, "trace fraction (%f)\n", tr.fraction);
-			if (tr.fraction >= 1) { // found a wall, trace again
-				VectorMA(start, 8192, forward, end);
-				
-				tr = gi.trace(start, NULL, NULL, end, ent, MASK_SHOT & ~MASK_WATER);
-				
-				// if succeed at second trace, spawn soldier at that location
-				if (tr.fraction < 1) {
-					gi.cprintf(ent, PRINT_HIGH, "second trace fraction (%f)\n", tr.fraction);
-					gi.cprintf(ent, PRINT_HIGH, "trace endpos (%f, %f, %f)\n", tr.endpos[0], tr.endpos[1], tr.endpos[2]);
-					_VectorCopy(tr.endpos, soldier->s.origin);
-					// move the soldier out of the wall/floor
-					VectorMA(soldier->s.origin, 50, tr.plane.normal, soldier->s.origin);
-					gi.cprintf(ent, PRINT_HIGH, "soldier final (%f, %f, %f)\n", soldier->s.origin[0], soldier->s.origin[1], soldier->s.origin[2]);
-					//gi.cprintf(ent, PRINT_HIGH, "soldier position set\n");
-
-					SP_monster_soldier_light(soldier);
-					//gi.cprintf(ent, PRINT_HIGH, "soldier spawn function called\n");
-					//VectorCopy(ent->s.origin, soldier->s.origin);
-					//soldier->s.origin[0] += 50;
-					//soldier->s.origin[1] += 50;
-					//soldier->s.origin[2] += 50;
-					//gi.cprintf(ent, PRINT_HIGH, "trace  @ x=%.2f y=%.2f z=%.2f\n", soldier->s.origin[0], soldier->s.origin[1], soldier->s.origin[2]);
-					//gi.cprintf(ent, PRINT_HIGH, "player @ x=%.2f y=%.2f z=%.2f\n", ent->s.origin[0], ent->s.origin[1], ent->s.origin[2]);
-
-					//soldier->classname = "monster_soldier_light";
-
-					gi.linkentity(soldier);
-				}
-				else {
-					gi.cprintf(ent, PRINT_HIGH, "failed second trace\n");
-				}
-			}
-			
-		}
-		else {
-			gi.cprintf(ent, PRINT_HIGH, "SOLDIER WAS NULL\n");
-			G_FreeEdict(soldier);
-		}
+	if (bigyihsuan_spawn_monster_at_player_look(ent, SP_monster_soldier_light)) {
+		gi.cprintf(ent, PRINT_HIGH, "spawned soldier\n");
 	}
 	else {
-		/*if (!(ent->owner)) {
-			gi.cprintf(ent, PRINT_HIGH, "owner was null\n");
-		}
-		if ((ent->owner) && !(ent->owner->client)) {
-			gi.cprintf(ent, PRINT_HIGH, "client was null\n");
-		}*/
-
-		gi.cprintf(ent, PRINT_HIGH, "not a player\n");
+		gi.cprintf(ent, PRINT_HIGH, "failed to spawn soldier\n");
 	}
-	//gi.cprintf(ent, PRINT_HIGH, "sucessful spawning\n");
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);

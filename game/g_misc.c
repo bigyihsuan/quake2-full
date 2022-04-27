@@ -1890,3 +1890,80 @@ void bigyihsuan_spawn_bullet_box(edict_t* entity) {
 	}
 }
 
+// moved from p_weapon.c
+void P_ProjectSource(gclient_t* client, vec3_t point, vec3_t distance, vec3_t forward, vec3_t right, vec3_t result)
+{
+	vec3_t	_distance;
+
+	VectorCopy(distance, _distance);
+	if (client->pers.hand == LEFT_HANDED)
+		_distance[1] *= -1;
+	else if (client->pers.hand == CENTER_HANDED)
+		_distance[1] = 0;
+	G_ProjectSource(point, _distance, forward, right, result);
+}
+
+// spawn a monster at the point the player is pointing
+// returns true if spawn success, false if failed
+qboolean bigyihsuan_spawn_monster_at_player_look(edict_t* ent, void (*spawn)(edict_t* monster)) {
+	vec3_t	forward, right;
+	vec3_t	start;
+	vec3_t	offset;
+
+	edict_t* soldier;
+	vec3_t angle;
+	vec3_t up, end;
+	trace_t tr;
+
+	// see: https://github.com/bigyihsuan/quake2-full/blob/73f7d1531068cb3e4bc6242e7f50fa96cfd77448/g_weapon.c#L452
+	if ((ent->client)) {
+		AngleVectors(ent->client->v_angle, forward, right, up);
+		VectorSet(offset, 24, 8, ent->viewheight - 8);
+		P_ProjectSource(ent->client, ent->s.origin, offset, forward, right, start);
+
+		gi.cprintf(ent, PRINT_HIGH, "player origin (%f, %f, %f)\n", ent->s.origin[0], ent->s.origin[1], ent->s.origin[2]);
+		vectoangles(forward, angle);
+		AngleVectors(angle, forward, right, up);
+		soldier = G_Spawn();
+		if (soldier != NULL) {
+			//gi.cprintf(ent, PRINT_HIGH, "soldier allocated\n");
+			tr = gi.trace(ent->s.origin, NULL, NULL, start, ent, MASK_SHOT & ~MASK_WATER); // trace from muzzle to origin to check for wall
+			//gi.cprintf(ent, PRINT_HIGH, "trace fraction (%f)\n", tr.fraction);
+			if (tr.fraction >= 1) { // found a wall, trace again
+				VectorMA(start, 8192, forward, end);
+
+				tr = gi.trace(start, NULL, NULL, end, ent, MASK_SHOT & ~MASK_WATER);
+
+				// if succeed at second trace, spawn soldier at that location
+				if (tr.fraction < 1) {
+					// gi.cprintf(ent, PRINT_HIGH, "second trace fraction (%f)\n", tr.fraction);
+					// gi.cprintf(ent, PRINT_HIGH, "trace endpos (%f, %f, %f)\n", tr.endpos[0], tr.endpos[1], tr.endpos[2]);
+					_VectorCopy(tr.endpos, soldier->s.origin);
+
+					// move the soldier out of the wall/floor
+					VectorMA(soldier->s.origin, 50, tr.plane.normal, soldier->s.origin);
+					//gi.cprintf(ent, PRINT_HIGH, "soldier final (%f, %f, %f)\n", soldier->s.origin[0], soldier->s.origin[1], soldier->s.origin[2]);
+					spawn(soldier);
+					gi.linkentity(soldier);
+				}
+				else {
+					//gi.cprintf(ent, PRINT_HIGH, "failed second trace\n");
+					return false;
+				}
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			//gi.cprintf(ent, PRINT_HIGH, "SOLDIER WAS NULL\n");
+			G_FreeEdict(soldier);
+			return false;
+		}
+	}
+	else {
+		//gi.cprintf(ent, PRINT_HIGH, "not a player\n");
+		return false;
+	}
+	return true;
+}

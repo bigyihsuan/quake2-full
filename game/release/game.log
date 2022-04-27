@@ -1,7 +1,57 @@
 ﻿D:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(500,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  p_weapon.c
-D:\SW\IT266-002\quake2-full\game\p_weapon.c(831,83): warning C4100: 'effect': unreferenced formal parameter
-D:\SW\IT266-002\quake2-full\game\p_weapon.c(839,9): warning C4101: 'scale': unreferenced local variable
-D:\SW\IT266-002\quake2-full\game\p_weapon.c(842,6): warning C4101: 'contentMask': unreferenced local variable
+  g_misc.c
+D:\SW\IT266-002\quake2-full\game\g_misc.c(31,61): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(31,45): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(104,77): warning C4100: 'surf': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(104,41): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(130,88): warning C4100: 'point': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(130,73): warning C4100: 'damage': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(130,59): warning C4100: 'attacker': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(130,39): warning C4100: 'inflictor': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(281,91): warning C4100: 'point': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(281,76): warning C4100: 'damage': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(281,62): warning C4100: 'attacker': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(281,42): warning C4100: 'inflictor': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(342,85): warning C4100: 'surf': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(342,66): warning C4100: 'plane': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(422,86): warning C4100: 'surf': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(422,67): warning C4100: 'plane': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(545,64): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(545,48): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(593,61): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(593,45): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(665,85): warning C4100: 'surf': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(683,63): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(683,47): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(745,103): warning C4100: 'point': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(745,88): warning C4100: 'damage': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(809,65): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(814,68): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(814,52): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(873,80): warning C4100: 'surf': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(873,61): warning C4100: 'plane': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(966,93): warning C4100: 'point': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(966,78): warning C4100: 'damage': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(966,44): warning C4100: 'inflictor': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1021,65): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1021,49): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1157,66): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1157,50): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1217,101): warning C4100: 'point': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1217,72): warning C4100: 'attacker': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1217,52): warning C4100: 'inflictor': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1330,89): warning C4100: 'surf': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1330,70): warning C4100: 'plane': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1330,53): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1358,51): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1452,71): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1452,55): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1577,65): warning C4100: 'activator': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1577,49): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1700,11): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1740,46): warning C4100: 'other': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1783,84): warning C4100: 'surf': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1783,65): warning C4100: 'plane': unreferenced formal parameter
+D:\SW\IT266-002\quake2-full\game\g_misc.c(1882,6): warning C4101: 'item_index': unreferenced local variable
      Creating library .\..\release\gamex86.lib and object .\..\release\gamex86.exp
   game.vcxproj -> D:\SW\IT266-002\quake2-full\game\release\gamex86.dll
