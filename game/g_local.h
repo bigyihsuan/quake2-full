@@ -1119,3 +1119,6 @@ void SP_monster_soldier_light(edict_t* self);
 void bigyihsuan_spawn_bullet_box(edict_t* entity);
 qboolean bigyihsuan_spawn_monster_at_player_look(edict_t* player, void (*spawn)(edict_t* monster));
 void P_ProjectSource(gclient_t* client, vec3_t point, vec3_t distance, vec3_t forward, vec3_t right, vec3_t result); // from p_weapon.c, moved to g_misc.c
+
+edict_t* other_G_PickTargetIgnore(char* targetname, edict_t* ignore);
+edict_t* other_Find_Nearest_Enemy(vec3_t origin, char* myTeam);

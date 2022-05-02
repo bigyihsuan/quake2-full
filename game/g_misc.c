@@ -1903,6 +1903,21 @@ void P_ProjectSource(gclient_t* client, vec3_t point, vec3_t distance, vec3_t fo
 	G_ProjectSource(point, _distance, forward, right, result);
 }
 
+// https://github.com/bigyihsuan/quake2-full/commit/a914c218c6e82360596e5f0ed850a34ab7de0067#diff-bf43d3f9019287c5d00b0c082c6af2f9c37216bdbc6217ebeae4ba08b7d89896R379-R392
+edict_t* other_Find_Nearest_Enemy(vec3_t origin, char* myTeam)
+{
+	edict_t* ent = NULL;
+	while ((ent = findradius(ent, origin, 8192)) != NULL)
+	{
+		if (ent->team == myTeam) // ignore people in my team
+			continue;
+		if (!ent->takedamage)
+			continue;
+		break;
+	}
+	return ent;
+}
+
 // spawn a monster at the point the player is pointing
 // returns true if spawn success, false if failed
 qboolean bigyihsuan_spawn_monster_at_player_look(edict_t* ent, void (*spawn)(edict_t* monster)) {
@@ -1944,6 +1959,9 @@ qboolean bigyihsuan_spawn_monster_at_player_look(edict_t* ent, void (*spawn)(edi
 					VectorMA(soldier->s.origin, 50, tr.plane.normal, soldier->s.origin);
 					//gi.cprintf(ent, PRINT_HIGH, "soldier final (%f, %f, %f)\n", soldier->s.origin[0], soldier->s.origin[1], soldier->s.origin[2]);
 					spawn(soldier);
+					soldier->team = ent->team;
+					soldier->owner = ent->owner;
+					soldier->target = other_Find_Nearest_Enemy(soldier->s.origin, soldier->team);
 					gi.linkentity(soldier);
 				}
 				else {

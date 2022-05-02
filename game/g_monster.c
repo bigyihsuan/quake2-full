@@ -599,6 +599,13 @@ void monster_start_go (edict_t *self)
 		fixup = false;
 		while ((target = G_Find (target, FOFS(targetname), self->target)) != NULL)
 		{
+			// bigyihsuan
+			// https://github.com/bigyihsuan/quake2-full/commit/a914c218c6e82360596e5f0ed850a34ab7de0067#diff-8be0dbe03bd5b78864a4d16b7de531d242a58ccc013b4d0b3a2b9fb6e8df4d6fR578
+			// if this monster's owner is the player, ignore them
+			if (target == self->owner) {
+				continue;
+			}
+
 			if (strcmp(target->classname, "point_combat") == 0)
 			{
 				self->combattarget = self->target;
@@ -623,6 +630,13 @@ void monster_start_go (edict_t *self)
 		target = NULL;
 		while ((target = G_Find (target, FOFS(targetname), self->combattarget)) != NULL)
 		{
+			// bigyihsuan
+			// https://github.com/bigyihsuan/quake2-full/commit/a914c218c6e82360596e5f0ed850a34ab7de0067#diff-8be0dbe03bd5b78864a4d16b7de531d242a58ccc013b4d0b3a2b9fb6e8df4d6fR604
+			// if this monster's owner is the player, ignore them
+			if (target == self->owner) {
+				continue;
+			}
+
 			if (strcmp(target->classname, "point_combat") != 0)
 			{
 				gi.dprintf("%s at (%i %i %i) has a bad combattarget %s : %s at (%i %i %i)\n",
@@ -635,7 +649,12 @@ void monster_start_go (edict_t *self)
 
 	if (self->target)
 	{
-		self->goalentity = self->movetarget = G_PickTarget(self->target);
+		// bigyihsuan
+		// https://github.com/bigyihsuan/quake2-full/commit/a914c218c6e82360596e5f0ed850a34ab7de0067#diff-8be0dbe03bd5b78864a4d16b7de531d242a58ccc013b4d0b3a2b9fb6e8df4d6fR619
+		// pick a target as well as an entity to ignore (the player)
+		self->goalentity = self->movetarget = other_G_PickTargetIgnore(self->target, self->owner);
+		
+		//self->goalentity = self->movetarget = G_PickTarget(self->target);
 		if (!self->movetarget)
 		{
 			gi.dprintf ("%s can't find target %s at %s\n", self->classname, self->target, vtos(self->s.origin));

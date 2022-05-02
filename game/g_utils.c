@@ -566,3 +566,39 @@ qboolean KillBox (edict_t *ent)
 
 	return true;		// all clear
 }
+
+// bigyihsuan
+// https://github.com/bigyihsuan/quake2-full/blob/a914c218c6e82360596e5f0ed850a34ab7de0067/g_utils.c#L13
+// pick a target, but ignore a given entity as well
+edict_t* other_G_PickTargetIgnore(char* targetname, edict_t* ignore)
+{
+	edict_t* ent = NULL;
+	int		num_choices = 0;
+	edict_t* choice[MAXCHOICES];
+
+	if (!targetname)
+	{
+		gi.dprintf("G_PickTarget called with NULL targetname\n");
+		return NULL;
+	}
+
+	while (1)
+	{
+		ent = G_Find(ent, FOFS(targetname), targetname);
+		if (!ent)
+			break;
+		if (ent == ignore) // important difference: ignore the ignorable entity
+			continue;
+		choice[num_choices++] = ent;
+		if (num_choices == MAXCHOICES)
+			break;
+	}
+
+	if (!num_choices)
+	{
+		gi.dprintf("G_PickTarget: target %s not found\n", targetname);
+		return NULL;
+	}
+
+	return choice[rand() % num_choices];
+}
