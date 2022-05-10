@@ -244,10 +244,43 @@ void DeathmatchScoreboardMessage (edict_t *ent, edict_t *killer)
 			break;
 		strcpy (string + stringlength, entry);
 		stringlength += j;
+
+		//gi.cprintf(ent, PRINT_HIGH, "%i: (x%i,y%i) sorted:%i, %i %i %i\n", i, x, y, sorted[i], cl->resp.score, cl->ping, (level.framenum - cl->resp.enterframe) / 600);
 	}
+
+	// bigyihsuan: Add help message to the scoreboard
+	i = total+1;
+	picnum = gi.imageindex("i_fixme");
+	x = (i >= 7) ? 160 : 0;
+	y = 32 + 32 * (i % 7);
+
+	// add a dogtag
+	tag = "tag1";
+	if (tag)
+	{
+		Com_sprintf(entry, sizeof(entry),
+			"xv %i yv %i picn %s cstring2 \"%s\" ", x + 32, y, tag, "SHOOT to spawn helpers,\nKILL to get ammo");
+		j = strlen(entry);
+		/*if (stringlength + j > 1024)
+			break;*/
+		strcpy(string + stringlength, entry);
+		stringlength += j;
+	}
+
+	// send the layout
+	Com_sprintf(entry, sizeof(entry),
+		"client %i %i cstring2 \"%s\" ",
+		x, y, "\nSHOOT to spawn helpers,\nKILL to get ammo");
+	j = strlen(entry);
+	/*if (stringlength + j > 1024)
+		break;*/
+	strcpy(string + stringlength, entry);
+	stringlength += j;
 
 	gi.WriteByte (svc_layout);
 	gi.WriteString (string);
+
+	//gi.cprintf(ent, PRINT_HIGH, "%s\n", string);
 }
 
 
@@ -320,12 +353,14 @@ void HelpComputer (edict_t *ent)
 		"xv 0 yv 24 cstring2 \"%s\" "		// level name
 		"xv 0 yv 54 cstring2 \"%s\" "		// help 1
 		"xv 0 yv 110 cstring2 \"%s\" "		// help 2
+		"xv 0 yv 120 cstring2 \"%s\"" // bigyihsuan: brief help description
 		"xv 50 yv 164 string2 \" kills     goals    secrets\" "
 		"xv 50 yv 172 string2 \"%3i/%3i     %i/%i       %i/%i\" ", 
 		sk,
 		level.level_name,
 		game.helpmessage1,
 		game.helpmessage2,
+		"SHOOT to spawn helpers,\nKILL to get ammo",
 		level.killed_monsters, level.total_monsters, 
 		level.found_goals, level.total_goals,
 		level.found_secrets, level.total_secrets);
