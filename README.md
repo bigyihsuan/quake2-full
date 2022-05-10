@@ -23,7 +23,7 @@ If you use Bash, you can run `build.sh` and provide the name of the folder to in
 * Shortcut that Auto-Launches your Mod (**DONE**: `000final.lnk`)
 * Mod in a Separate Folder (**DONE**: yes)
 * README file in GIT that explains HOWTO install and play / test your mod (**DONE**: this file)
-* UI updates reflecting your Personal Deliverables
+* UI updates reflecting your Personal Deliverables (**HALF**: shüüt :))
 * Help Screen to detail how to play your mod in game (**DONE**: Press F1)
 
 ## Personal Deliverables
