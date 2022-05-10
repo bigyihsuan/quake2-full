@@ -1324,7 +1324,7 @@ always owned, never in the world
 /* pickup */	"Shotgun",
 		0,
 		1,
-		"Shells",
+		"Bullets",
 		IT_WEAPON|IT_STAY_COOP,
 		WEAP_SHOTGUN,
 		NULL,
@@ -1347,7 +1347,7 @@ always owned, never in the world
 /* pickup */	"Super Shotgun",
 		0,
 		2,
-		"Shells",
+		"Bullets",
 		IT_WEAPON|IT_STAY_COOP,
 		WEAP_SUPERSHOTGUN,
 		NULL,
@@ -1416,11 +1416,11 @@ always owned, never in the world
 /* pickup */	"Grenades",
 /* width */		3,
 		5,
-		"grenades",
+		"Bullets",
 		IT_AMMO|IT_WEAPON,
 		WEAP_GRENADES,
 		NULL,
-		AMMO_GRENADES,
+		AMMO_BULLETS,
 /* precache */ "weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
 	},
 
@@ -1439,7 +1439,7 @@ always owned, never in the world
 /* pickup */	"Grenade Launcher",
 		0,
 		1,
-		"Grenades",
+		"Bullets",
 		IT_WEAPON|IT_STAY_COOP,
 		WEAP_GRENADELAUNCHER,
 		NULL,
@@ -1462,7 +1462,7 @@ always owned, never in the world
 /* pickup */	"Rocket Launcher",
 		0,
 		1,
-		"Rockets",
+		"Bullets",
 		IT_WEAPON|IT_STAY_COOP,
 		WEAP_ROCKETLAUNCHER,
 		NULL,
@@ -1485,7 +1485,7 @@ always owned, never in the world
 /* pickup */	"HyperBlaster",
 		0,
 		1,
-		"Cells",
+		"Bullets",
 		IT_WEAPON|IT_STAY_COOP,
 		WEAP_HYPERBLASTER,
 		NULL,
@@ -1508,7 +1508,7 @@ always owned, never in the world
 /* pickup */	"Railgun",
 		0,
 		1,
-		"Slugs",
+		"Bullets",
 		IT_WEAPON|IT_STAY_COOP,
 		WEAP_RAILGUN,
 		NULL,
@@ -1531,7 +1531,7 @@ always owned, never in the world
 /* pickup */	"BFG10K",
 		0,
 		50,
-		"Cells",
+		"Bullets",
 		IT_WEAPON|IT_STAY_COOP,
 		WEAP_BFG,
 		NULL,
@@ -1562,7 +1562,7 @@ always owned, never in the world
 		IT_AMMO,
 		0,
 		NULL,
-		AMMO_SHELLS,
+		AMMO_BULLETS,
 /* precache */ ""
 	},
 
@@ -1608,7 +1608,7 @@ always owned, never in the world
 		IT_AMMO,
 		0,
 		NULL,
-		AMMO_CELLS,
+		AMMO_BULLETS,
 /* precache */ ""
 	},
 
@@ -1631,7 +1631,7 @@ always owned, never in the world
 		IT_AMMO,
 		0,
 		NULL,
-		AMMO_ROCKETS,
+		AMMO_BULLETS,
 /* precache */ ""
 	},
 
@@ -1654,7 +1654,7 @@ always owned, never in the world
 		IT_AMMO,
 		0,
 		NULL,
-		AMMO_SLUGS,
+		AMMO_BULLETS,
 /* precache */ ""
 	},
 
